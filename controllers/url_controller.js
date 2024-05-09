@@ -32,10 +32,16 @@ const handleUserShortUrl = async (req, res) => {
 }
 
 const handleShowClickHistory = async (req, res) => {
-    // todo: do this 
+    const shortId = req.params.shortId;
+    const result = await urlModel.findOne({ shortId });
+    return res.json({
+        totalClick: result.visitHistory.length,
+        analytics: result.visitHistory,
+    })
 }
 
 module.exports = {
     handleGenerateNewShortUrl,
-    handleUserShortUrl
+    handleUserShortUrl,
+    handleShowClickHistory
 }
