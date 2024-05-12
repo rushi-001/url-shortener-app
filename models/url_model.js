@@ -14,6 +14,6 @@ const urlSchema = new mongoose.Schema({
     visitHistory: [{ timestamp: { type: Number } }],
 }, { timestamps: true });
 
-const urlModel = mongoose.model("url", urlSchema); // `url` is the collection name in database
+const urlModel = mongoose.model("url", urlSchema); // `url` is the collection name in database mongodb automaticaly makes the url to urls
 
 module.exports = urlModel; 
