@@ -2,10 +2,12 @@
 const express = require("express");
 const connectMongoDB = require("./connection");
 const path = require("path");
+const cookieParser = require('cookie-parser')
 
 const urlRoutes = require("./routes/url_routes");
 const staticRoutes = require("./routes/staticRouter");
-const userRoutes = require("./routes/user_Routes.js")
+const userRoutes = require("./routes/user_Routes.js");
+const { restictToLoggedinUserOnly, checkAuth } = require("./middleware/auth_middleware.js")
 
 const app = express()
 const PORT = 8001;
@@ -17,12 +19,13 @@ app.set("views", path.resolve("./view"))
 // Middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 
 // All Routes
-app.use("/", staticRoutes);
+app.use("/", checkAuth, staticRoutes);
 
 // Action parform Routes
-app.use("/url", urlRoutes);
+app.use("/url", restictToLoggedinUserOnly, urlRoutes); // inline middleware `userWithSessionId`
 app.use("/user", userRoutes);
 
 // Server Connection

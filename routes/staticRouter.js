@@ -4,7 +4,8 @@ const urlModel = require("../models/url_model.js")
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-    const data = await urlModel.find({});
+    if (!req.user) return res.redirect("/login")
+    const data = await urlModel.find({ createdBy: req.user._id });
     return res.render("home", {
         userData: data,
     })

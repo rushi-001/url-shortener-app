@@ -9,6 +9,8 @@ const handleGenerateNewShortUrl = async (req, res) => {
         shortId: shortUrlId,
         redirectedUrl: body.url,
         visitHistory: [],
+        createdBy: req.user._id, // id is session id which given by middleware
+
     })
     return res.render("home", {
         id: shortUrlId

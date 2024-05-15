@@ -1,4 +1,6 @@
 const userModel = require("../models/user_model.js");
+const { setUser, getUser } = require("../service/auth_service.js")
+const { v4: uuidv4 } = require("uuid");
 
 const handleUserSignup = async (req, res) => {
     const { name, email, password } = req.body;
@@ -18,6 +20,9 @@ const handleUserLogin = async (req, res) => {
             error: "Invalid user or password (worng pass only... :>)"
         })
     }
+    const sessionId = uuidv4();
+    setUser(sessionId, user);
+    res.cookie("uid", sessionId);
     return res.redirect("/");
 }
 
