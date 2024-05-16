@@ -1,4 +1,3 @@
-// todo: generate uid and show data acordingly that on user
 const express = require("express");
 const connectMongoDB = require("./connection");
 const path = require("path");
@@ -22,7 +21,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 // All Routes
-app.use("/", checkAuth, staticRoutes);
+app.use("/", checkAuth, staticRoutes); // inline middleware `checkAuth`
 
 // Action parform Routes
 app.use("/url", restictToLoggedinUserOnly, urlRoutes); // inline middleware `userWithSessionId`
