@@ -19,7 +19,7 @@
 // StateLess
 const jwt = require("jsonwebtoken")
 
-const key = "3w@ovNR4"
+const key = "3w@ovNR4" // Security key don't tell any one about this key
 
 // it set's session session token 
 const setUser = (user) => {
